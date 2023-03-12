@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!--Meta Tags Obrigatórias-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Estilo-->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!--Favicon Mosca-->
+    <link rel="shortcut icon" href="img/mosca.png" type="image/x-icon">
+    
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <title>Sorteio Replace</title>
+</head>
+<body id="pagSorteado" class="bg-1">
+    <div class="fundo">
+        <div id="container"><!--Inicio do container-->
+            
+            <div id="areaTitle">
+                <h1>Sorteio de Bolos Replace</h1>
+            </div>
+            <div class="card">
+                <p>
+                    <span id="nomePessoa"></span>, você terá de
+                    comprar um bolo na <span id="nomeLoja"></span>.
+                </p>
+                <p>
+                    Informações sobre a loja: <br>
+                    Localização: <span id="enderecoLoja"></span>. <br>
+                    Contato: <span id="contatoLoja"></span>.
+                </p>
+                <div class="divBtn">
+                    <button type="button" title="Voltar" id="btnVoltar">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        
+        </div><!--Fim do container-->
+    </div>
+
+    <!--Scripts-->
+    <script src="../js/index.js"></script>
+</body>
+</html>
