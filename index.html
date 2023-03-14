@@ -7,27 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--Estilo-->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!--Favicon Mosca-->
-    <link rel="shortcut icon" href="../img/mosca.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/mosca.png" type="image/x-icon">
+
+    <!--FontAwesome-->
+    <script src="https://kit.fontawesome.com/68c1cffbc5.js" crossorigin="anonymous"></script>
 
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
     <title>Sorteio Replace</title>
 </head>
-<body id="pagIndex" class="bg-1">
-    <div class="fundo">
-        <div id="container"><!--Inicio do container-->
-            
-            <div id="areaTitle">
-                <h2>Bem-vindo(a) ao</h2>
-                <h1>Sorteio de Bolos Replace</h1>
-            </div>
-            <div id="areaBtn">
-                <div class="divSelect">
-                    <select id="listarPessoas">
+<body>
+    <nav class="divTitle">
+        <div>
+            <h1>Sorteio de Bolos Replace</h1>
+        </div>
+
+        <div class="">
+            <button type="button" title="Adicionar Loja" id="btnAddLoja">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <button type="button" title="Adicionar Pessoa" id="btnAddPessoa">
+                <i class="fa-solid fa-user-plus"></i>
+            </button>
+            <button type="button" title="Alterar Modo" id="alterarModo">
+                <i class="fa-solid fa-sun"></i>
+                <!--<i class="fa-regular fa-moon"></i>-->
+            </button>
+        </div>
+    </nav>
+
+    <div class="container"><!--Inicio do container-->
+
+        <div class="card">
+            <!--Div inicial de sorteio-->
+            <div id="divSorteio">
+                <div class="divImg">
+                    <img src="img/capa.gif" alt="Capa" id="img-capa">
+                </div>
+                <div class="divBtn">
+                    <select id="listarPessoas" title="Selecionar pessoa">
                         <option value="">Selecionar pessoa...</option>
                     </select>
                 </div>
@@ -37,11 +59,36 @@
                     </button>
                 </div>
             </div>
-        
-        </div><!--Fim do container-->
-    </div>
+
+            <!--Div quando sorteado-->
+            <div id="divSorteado">
+                <div class="title-card">
+                    <p>
+                        <span id="nomePessoa" class="destaque"></span> vai comprar o
+                        bolo na <span id="nomeLoja" class="destaque"></span>.
+                    </p>
+                </div>
+                <div class="divImg">
+                    <img src="" alt="Loja" id="img-loja">
+                </div>
+                <div class="body-card">
+                    <h3>Informações sobre a loja:</h3>
+                    <p>
+                        Localização: <span id="enderecoLoja" class="destaque"></span>. <br>
+                        Contato: <span id="contatoLoja" class="destaque"></span>.
+                    </p>
+                </div>
+                <div class="divBtn">
+                    <button type="button" title="Voltar" id="btnVoltar">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+    </div><!--Fim do container-->
 
     <!--Scripts-->
-    <script src="../js/index.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

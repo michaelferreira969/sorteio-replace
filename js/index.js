@@ -17,17 +17,36 @@ class Pessoa {
 
 //Eventos
 
+/*Ocultar div ao carregar página*/
+$("#divSorteado").hide();
+
 /*Ao clicar no botão sortear*/
 $(document).on("click", "#btnSortear", function () {
-  let sorteado = Sorteio();
+  /*ocultar div*/
+  $("#divSorteio").hide();
 
-  MontarPagSorteado(sorteado);
+  /*Mostrar div*/
+  $("#divSorteado").show();
+
+  //Chama função que faz sorteio
+  let sorteado = Sorteio(); 
+
+  PreencherDivSorteado(sorteado);
 });
 
 /*Ao clicar no botão voltar*/
 $(document).on("click", "#btnVoltar", function () {
-  //Abre outra página
-  window.location.href = "index.html";
+  /*Limpar campos*/
+  $("#nomePessoa").remove();
+  $("#nomeLoja").remove();
+  $("#enderecoLoja").remove();
+  $("#contatoLoja").remove();
+
+  /*Mostrar div*/
+  $("#divSorteio").show();
+
+  /*Ocultar div*/
+  $("#divSorteado").hide();
 });
 
 let listLojas = [];
@@ -66,40 +85,40 @@ pessoa = new Pessoa("J", "michael@", 12114789)
 listPessoas.push(pessoa);
 
 //Funções
+
 function Sorteio() {
-  return Math.floor(Math.random() * listLojas.length);
+  return Math.floor(Math.random() * (listLojas.length));
 }
 
-function MontarPagSorteado(sorteado) {
-  //Abre outra página
-  window.location.href = "sorteado.html";
+function PreencherDivSorteado(sorteado) {
 
-  console.log(listPessoas[sorteado]);
-
+  console.log(sorteado)
+  console.log(listLojas[sorteado])
+ 
   //preenche o campo de nome da pessoa
-  $("#nomePessoa").append(listPessoas[sorteado]);
-
+  $("#nomePessoa").append(listPessoas[sorteado].nome);
+  
   //preenche o campo de nome da loja
-  $("#nomeLoja").append(listLojas[sorteado]);
+  $("#nomeLoja").append(listLojas[sorteado].nome);
 
   //preenche o campo de endereço da loja
-  $("#enderecoLoja").append(listLojas[sorteado]);
+  $("#enderecoLoja").append(listLojas[sorteado].endereco);
   
   //preenche o campo de contato da loja
-  $("#contatoLoja").append(listLojas[sorteado]);
+  $("#contatoLoja").append(listLojas[sorteado].contato);
+
+  AlterarImagemLoja(listLojas[sorteado].nome);
 }
 
-/*Alterar plano de fundo a cada 2 minutos*/
-setInterval(alterarFundo, 120000);
+/*Mudar a imagem da loja*/
+function AlterarImagemLoja(nomeLoja) {
 
-/*Mudar o plano de fundo*/
-function alterarFundo() {
-  if($("body").hasClass("bg-1"))
-    $("body").addClass("bg-2");
-  else if($("body").hasClass("bg-2"))
-    $("body").addClass("bg-3");
+  if(nomeLoja == "Sodie") 
+    $("#img-loja").attr("src", "img/bg-1.jpg");
+  else if(nomeLoja == "Supremo")
+    $("#img-loja").attr("src", "img/bg-2.jpg");
   else 
-    $("body").addClass("bg-1");
+    $("#img-loja").attr("src", "img/bg-3.jpg");
 }
 
 /*Listar pessoas
