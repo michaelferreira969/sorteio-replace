@@ -29,18 +29,19 @@ $(document).on("click", "#btnSortear", function () {
   $("#divSorteado").show();
 
   //Chama função que faz sorteio
-  let sorteado = Sorteio(); 
+  let numSorteado = Sorteio(); 
 
-  PreencherDivSorteado(sorteado);
+  PreencherDivSorteado(numSorteado);
 });
 
 /*Ao clicar no botão voltar*/
 $(document).on("click", "#btnVoltar", function () {
+  console.log()
   /*Limpar campos*/
-  $("#nomePessoa").remove();
-  $("#nomeLoja").remove();
-  $("#enderecoLoja").remove();
-  $("#contatoLoja").remove();
+  $("#nomePessoa").empty();
+  $("#nomeLoja").empty();
+  $("#enderecoLoja").empty();
+  $("#contatoLoja").empty();
 
   /*Mostrar div*/
   $("#divSorteio").show();
@@ -90,24 +91,23 @@ function Sorteio() {
   return Math.floor(Math.random() * (listLojas.length));
 }
 
-function PreencherDivSorteado(sorteado) {
-
-  console.log(sorteado)
-  console.log(listLojas[sorteado])
+function PreencherDivSorteado(numSorteado) {
+  let pessoaSorteada = listPessoas[numSorteado];
+  let lojaSorteada = listLojas[numSorteado];
  
   //preenche o campo de nome da pessoa
-  $("#nomePessoa").append(listPessoas[sorteado].nome);
+  $("#nomePessoa").append(pessoaSorteada.nome);
   
   //preenche o campo de nome da loja
-  $("#nomeLoja").append(listLojas[sorteado].nome);
+  $("#nomeLoja").append(lojaSorteada.nome);
 
   //preenche o campo de endereço da loja
-  $("#enderecoLoja").append(listLojas[sorteado].endereco);
+  $("#enderecoLoja").append(lojaSorteada.endereco);
   
   //preenche o campo de contato da loja
-  $("#contatoLoja").append(listLojas[sorteado].contato);
+  $("#contatoLoja").append(lojaSorteada.contato);
 
-  AlterarImagemLoja(listLojas[sorteado].nome);
+  AlterarImagemLoja(lojaSorteada.nome);
 }
 
 /*Mudar a imagem da loja*/

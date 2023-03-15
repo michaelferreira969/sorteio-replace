@@ -43,17 +43,20 @@
 }
 
 body {
+    background-color: #182237;
+/*    
     height: 100vh;
     background: linear-gradient(to bottom, #182237, #013F47);
     background-size: 400% 400%;
     animation: gradient 14s ease infinite;
+*/
     font-family: Montserrat, Arial, sans-serif;
     font-size: 1rem;
 }
 
 h1 {
     font-weight: 600;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: Righteous;
     color: #FA6615;
     letter-spacing: .4rem;
@@ -65,6 +68,12 @@ h3 {
     font-size: 1.2rem;
     font-weight: 200;
     text-align: center;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 200;
+    display: inline-block;
 }
 
 button, select {
@@ -92,15 +101,29 @@ select:focus {
     outline: none;
 }
 
-nav {
+header {
     background: #1118279d;
     border-bottom: 1px solid rgba(0, 0, 0, 0.849);
     padding: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+footer {
+    width: 100%;
+
+    background: #1118279d;
+    border-top: 1px solid rgba(0, 0, 0, 0.849);
+    padding: 1rem 0;
+    margin-top: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    color: rgba(255, 255, 255, 0.658);
 }
 
 /*Botão*/
@@ -114,6 +137,7 @@ nav {
 }
 
 .container {
+    height: 100vh;
     /*Centralizar container*/
 /*    position: absolute;
     top: 50%;
@@ -132,7 +156,6 @@ nav {
     padding: 1rem;
     box-shadow: .2rem .3rem 1rem rgba(0, 0, 0, 0.507);
     border-radius: .7rem;
-    margin-bottom: 2rem;
 }
 
 .divImg img {
