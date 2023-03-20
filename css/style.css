@@ -3,6 +3,31 @@
     margin: 0;
 }
 
+/*
+ Cores
+
+Bege
+#FAE9C4
+
+Marrons claro
+#A97B56
+
+Marrom escuro
+#523434
+
+Vermelho
+#DB514D
+
+Azul
+#ABC8BC
+
+Laranja
+#FA6615
+
+Verde
+#4CAF50
+*/
+
 /*Fontes*/
 @font-face {
     font-family: Montserrat;
@@ -33,6 +58,29 @@ body {
     background-color: #A97B56;
     font-family: Montserrat, Arial, sans-serif;
     font-size: 1rem;
+
+    display: grid;
+    overflow-x: hidden;
+}
+
+header, section, footer {
+    display: flex;
+    align-items: baseline;
+}
+
+header {
+    align-items: center;
+}
+
+footer {
+    color: rgba(255, 255, 255, 0.658);
+    padding: 1rem 0;
+    justify-content: center;
+}
+
+section {
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -46,20 +94,12 @@ h1 {
 h2 {
     padding-left: .6rem;
     font-weight: 600;
-    font-size: 1.4rem;
     font-family: Righteous;
     color: #523434;
     letter-spacing: .3rem;
 }
 
-h3 {
-    color: rgba(255, 255, 255, 0.658);
-    font-size: 1.2rem;
-    font-weight: 200;
-}
-
 h4 {
-    font-size: 1rem;
     font-weight: 200;
     display: inline-block;
 }
@@ -72,12 +112,6 @@ button {
     font-size: 1rem;
     border: none;
     border-radius: 0.25rem;
-}
-
-header button, header a {
-    background-color: rgba(0, 0, 0, 0.151);
-    border: 2px solid #FAE9C4;
-    color: #FAE9C4;
 }
 
 a, a:visited {
@@ -98,38 +132,14 @@ select {
     color: rgb(41, 41, 41);
 }
 
-/*Retirar linha quando clicado*/
 select:focus {
     border: none;
     outline: none;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.8rem;
-}
-
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    color: rgba(255, 255, 255, 0.658);
-    position: absolute;
-    bottom: 0px;
-    left: 40%;
-    padding: 1rem 0;
-}
-
 form {
     background-color: #A97B56;
+    border: 2px solid #FAE9C4;
     border-radius: 1rem;
     padding: 1rem;
     margin: 2rem auto;
@@ -139,7 +149,7 @@ form {
 label {
     display: block;
     margin-bottom: 10px;
-    color: #fff;
+    color: #FAE9C4;
 }
 
 input[type="text"],
@@ -150,35 +160,30 @@ input[type="tel"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    background-color: #FAE9C4;
 }
 
-button#btnAddLoja, button#btnAddPessoa {
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    padding: .5rem .8rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.btnTopo {
+    background-color: rgba(0, 0, 0, 0.151);
+    border: 2px solid #FAE9C4;
+    color: #FAE9C4;
 }
 
-#btnSortear:hover, #btnVoltar:hover {
-    border: 2px solid #FA6615;
+.btnTopo:hover {
+    background-color: #FAE9C4;
+    color: #182237;
+}
+
+.btnTopo span {
+    display: none;
 }
 
 #btnModalAddPessoa, #btnModalVerPessoas  {
     margin: 0 0.5rem;
 }
 
-#btnModalAddLoja:hover, #btnModalAddPessoa:hover, #alterarModo:hover, 
-#btnModalVerPessoas:hover, #btnModalVerLojas:hover {
-    background-color: #FAE9C4;
-    color: #182237;
-}
-
 .container {
     display: grid;
-    grid-template-columns: 50% 50%;
     justify-content: center;
 }
 
@@ -193,32 +198,7 @@ h1 strong {
 
 #divSorteio p {
     color: rgba(255, 255, 255, 0.658);
-    max-width: 25rem;
     margin: 1rem 0;
-}
-
-.divImg img {
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
-.divBtn {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: start;
-}
- 
-/*Botão*/
-#btnSortear, #btnVoltar {
-    color: #FAE9C4;
-    background-color: #FA6615;
-    animation: animarBtn 1s ease-in-out infinite alternate-reverse;
-}
-
-#btnSortear:hover, #btnVoltar:hover {
-    transition: 0.6s all ease-in-out;
-    background-color: #fae9c4c2;
-    color: #FA6615;
 }
 
 .title-card {
@@ -238,11 +218,55 @@ h1 strong {
 }
 
 .body-card {
+    border-radius: .5rem;
+    border: 2px solid #FAE9C4;
+    padding: .4rem;
     margin: 1rem 0;
+}
+
+#btnSortear, #btnVoltar {
+    color: #FAE9C4;
+    background-color: #FA6615;
+    animation: animarBtn 1s ease-in-out infinite alternate-reverse;
+}
+
+#btnSortear:hover, #btnVoltar:hover {
+    transition: 0.6s all ease-in-out;
+    background-color: #fae9c4c2;
+    color: #FA6615;
+}
+
+.divImg img {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.divBtn {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: start;
 }
 
 .modal {
     background-color: #A97B56 !important;
+}
+
+.error {
+    color: red;
+}
+
+.btnAdd {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: .5rem .8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btnAdd:hover {
+    background-color: #69b46b;
 }
 
 table {
@@ -281,74 +305,176 @@ table tr:nth-child(even) {
     font-size: .7rem;
 }
 
-  
+@media (max-width: 576px) {
+    h1 {
+        text-align: center;
+    }
 
-/*
+    header {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        justify-content: center;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        border-top-right-radius: .5rem;
+        border-top-left-radius: .5rem;
 
-<div class="checkbox">
-    <input type="checkbox" id="chk1" class="checkbox" name="chk">
-    <label for="chk1">
-        Pessoa aleatória?
-    </label>
-</div>
+        background-color: #523434;
+    }
 
-.checkbox {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 1rem;
-}
-.checkbox input {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-.checkbox label {
-    position: relative;
-    padding-left: 2.2em;
-    display: inline-block;
-    color: white;
-}
-.checkbox label::before {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    height: 1.5em;
-    width: 1.5em;
-    background: #333333;
-    margin-right: 0.5em;
-    border: 1px solid #999;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(0, -50%);
-}
-.checkbox label::after {
-    content: "\2713";
-    position: absolute;
-    top: 50%;
-    left: 0.75em;
-    transform: translate(-50%, -50%);
-    font-size: 1em;
-    color: #424242;
-    opacity: 0;
-    transition: all 0.2s ease;
-}
-.checkbox label:focus::before, .checkbox label:hover::before {
-    background: #363636;
-}
-.checkbox input:checked + label::before {
-    background: #FA6615;
-    border-color: #FA6615;
-}
-.checkbox input:checked + label::after {
-    opacity: 1;
+    form {
+        width: 90%;
+    }
+
+    header div {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .btnTopo {
+        background: none;
+        border: none;
+        color: #FAE9C4;
+    }
+
+    .btnTopo span {
+        display: none;
+    }
+
+    .container {
+        grid-template-columns: 100%;
+    }
+
+    .card div {
+        justify-content: center;
+    }
+
+    #divSorteio p {
+        text-align: center;
+        max-width: 40rem;
+    }    
+
+    footer {
+        margin-bottom: 3.4rem;
+    }
+
+    .modal {
+        min-width: 300px;
+        width: 95% !important;
+        padding: .4rem !important;
+    }
 }
 
-*/
+@media (min-width: 576px) {
+    body {
+        height: 100vh;
+        grid-template-rows: auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    header {
+        padding: .8rem;
+    }
+
+    .btnTopo span {
+        display: none;
+    }
+
+    .container {
+        grid-template-columns: 100%;
+    }
+
+    .card div {
+        justify-content: center;
+    }
+
+    #divSorteio p {
+        max-width: 40rem;
+    }
+}
+
+@media (min-width: 992px) {
+    body {
+        grid-template-rows: 10% 80% 10%;
+    }
+
+    h1 {
+        text-align: left;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    .btnTopo span {
+        display: inline-block;
+    }
+
+    .btnTopo i {
+        margin-left: .4rem;
+    }
+
+    .container {
+        grid-template-columns: 50% 50%;
+    }
+
+    .card {
+        padding: 2rem;
+    }
+
+    .card div {
+        justify-content: left;
+    }
+
+    #divSorteio p {
+        max-width: 25rem;
+        text-align: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    #divSorteio p {
+        max-width: 40rem;
+    }
+
+    #modalVerLojas, #modalVerPessoas {
+        max-width: 800px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    body {
+        font-size: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    select {
+        font-size: 1.5rem;
+    }
+
+    #btnSortear, #btnVoltar {
+        font-size: 1.5rem;
+    }
+}
+

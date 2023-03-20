@@ -161,7 +161,7 @@ $(document).on("click", "#btnAddPessoa", function () {
 });
 
 /*Montar dados da tabela Loja*/
-$(document).on("click", "#btnModalVerPessoas", function () {
+$(document).on("click", "#btnModalVerLojas", function () {
   $("#tableVerLojas tbody").empty();
   preencherTableLojas(listLojas);
 });
@@ -171,6 +171,29 @@ $(document).on("click", "#btnModalVerPessoas", function () {
   $("#tableVerPessoas tbody").empty();
   preencherTablePessoa(listPessoas);
 });
+
+$("#iNomeLoja").on("keyup", function (params) {
+  console.log(params.value);
+  if(params == "1")
+      $("#nomeErro").val("Por favor");
+      $("#nomeErro").addClass("error");    
+});
+
+const nomeInput = document.getElementById("iNomeLoja");
+const nomeErro = document.getElementById("nomeErro");
+
+
+
+nomeInput.addEventListener("input", function (event) {
+  if (nomeInput.validity.valid) {
+    nomeErro.innerHTML = "";
+    nomeErro.className = "";
+  } else {
+    nomeErro.innerHTML = "Por favor, preencha este campo corretamente.";
+    nomeErro.className = "error";
+  }
+});
+
 
 //Funções
 

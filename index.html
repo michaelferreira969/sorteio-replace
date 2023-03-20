@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!--Estilo-->
+    <!--Style-->
     <link rel="stylesheet" href="css/style.css">
 
-    <!--Favicon Mosca-->
+    <!--Favicon-->
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 
     <!--FontAwesome-->
@@ -30,18 +30,18 @@
 </head>
 <body>
     <header>
-        <div class="">
-            <a href="#modalAddLoja" rel="modal:open" title="Adicionar Loja" id="btnModalAddLoja">
-                Adicionar Loja
+        <div>
+            <a href="#modalAddLoja" rel="modal:open" title="Adicionar Loja" id="btnModalAddLoja" class="btnTopo">
+                <span>Adicionar Loja</span><i class="fa-solid fa-circle-plus"></i>
             </a>
-            <a href="#modalAddPessoa" rel="modal:open" title="Adicionar Pessoa" id="btnModalAddPessoa">
-                Adicionar Pessoa
+            <a href="#modalAddPessoa" rel="modal:open" title="Adicionar Pessoa" id="btnModalAddPessoa" class="btnTopo">
+                <span>Adicionar Pessoa</span><i class="fa-solid fa-user-plus"></i>
             </a>
-            <a href="#modalVerLojas" rel="modal:open" title="Visualizar Lojas" id="btnModalVerLojas">
-                Visualizar Lojas
+            <a href="#modalVerLojas" rel="modal:open" title="Visualizar Lojas" id="btnModalVerLojas" class="btnTopo">
+                <span>Visualizar Lojas</span><i class="fa-solid fa-store"></i>
             </a>
-            <a href="#modalVerPessoas" rel="modal:open" title="Visualizar Pessoas" id="btnModalVerPessoas">
-                Visualizar Pessoas
+            <a href="#modalVerPessoas" rel="modal:open" title="Visualizar Pessoas" id="btnModalVerPessoas" class="btnTopo">
+                <span>Visualizar Pessoas</span><i class="fa-solid fa-user"></i>
             </a>
             <!--<button type="button" title="Adicionar Modo" id="alterarModo">
                 <i class="fa-solid fa-sun"></i>
@@ -85,7 +85,6 @@
                         </p>
                     </div>
                     <div class="body-card">
-                        <h3>Sobre a loja:</h3>
                         <p>
                             Localização: <span id="enderecoLoja" class="destaque"></span>. <br>
                             Contato: <span id="contatoLoja" class="destaque"></span>.
@@ -112,6 +111,7 @@
             <form>
               <label for="nome">Nome da Loja:</label>
               <input type="text" id="iNomeLoja" name="iNomeLoja" required>
+              <span id="nomeErro" class=""></span>
               <br>
               <label for="endereco">Endereço:</label>
               <input type="text" id="iEnderecoLoja" name="iEnderecoLoja" required>
@@ -119,7 +119,7 @@
               <label for="contato">Contato:</label>
               <input type="tel" id="iContatoLoja" name="iContatoLoja">
               <br>
-              <button type="button" id="btnAddLoja">Adicionar</button>
+              <button type="button" id="btnAddLoja" class="btnAdd">Adicionar</button>
             </form>
         </div>
 
@@ -136,7 +136,7 @@
               <label for="contato">Contato:</label>
               <input type="tel" id="iContatoPessoa" name="iContatoPessoa">
               <br>
-              <button type="button" id="btnAddPessoa">Adicionar</button>
+              <button type="button" id="btnAddPessoa" class="btnAdd">Adicionar</button>
             </form>
         </div>
 
@@ -144,7 +144,7 @@
         <div id="modalVerLojas" class="modal">
             <h2>Visualizar Lojas</h2>
             <div>
-                <table id="tableVerLojas">
+                <table id="tableVerLojas" class="table">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -155,6 +155,9 @@
                     <tbody>
                     </tbody>
                 </table>
+                <div style="display: none;">
+                    Total de <span></span> Lojas.
+                </div>
             </div>
         </div>
 
@@ -162,7 +165,7 @@
         <div id="modalVerPessoas" class="modal">
             <h2>Visualizar Pessoas</h2>
             <div>
-                <table id="tableVerPessoas">
+                <table id="tableVerPessoas" class="table">
                     <thead>
                         <tr>
                             <th>Nome</th>
