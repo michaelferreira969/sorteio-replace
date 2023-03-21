@@ -69,6 +69,10 @@ listPessoas.push(pessoa);
 
 //Eventos
 
+//Mask
+$('#iContatoLoja').mask('(00) 0000-0000');
+$('#iContatoPessoa').mask('(00) 0000-0000');
+
 /*Ocultar div ao carregar página*/
 $("#divSorteado").hide();
 
@@ -164,36 +168,109 @@ $(document).on("click", "#btnAddPessoa", function () {
 $(document).on("click", "#btnModalVerLojas", function () {
   $("#tableVerLojas tbody").empty();
   preencherTableLojas(listLojas);
+
+  $("#totalLojas").append(listLojas.length);
 });
 
 /*Montar dados da tabela Pessoa*/
 $(document).on("click", "#btnModalVerPessoas", function () {
   $("#tableVerPessoas tbody").empty();
   preencherTablePessoa(listPessoas);
+
+  $("#totalPessoas").append(listPessoas.length);
 });
 
-$("#iNomeLoja").on("keyup", function (params) {
-  console.log(params.value);
-  if(params == "1")
-      $("#nomeErro").val("Por favor");
-      $("#nomeErro").addClass("error");    
-});
+$("#iNomeLoja").on("keyup", function() {
+  $(".form-text").empty();
 
-const nomeInput = document.getElementById("iNomeLoja");
-const nomeErro = document.getElementById("nomeErro");
+  const elemento = $(this);
+  const elementoNext = $(this).next(".form-text");
+  const val = elemento.val();
 
+  if(verificaString(val)) {
+    elemento.removeClass("campo-error");
+    elemento.addClass("campo-success");
+    
+    $("#btnAddLoja").removeAttr("disabled");
+  }
+  else {
+    elemento.removeClass("campo-success");
+    elemento.addClass("campo-error");
+    elementoNext.addClass("msg-error");
+    elementoNext.append("Nome inválido!");
 
-
-nomeInput.addEventListener("input", function (event) {
-  if (nomeInput.validity.valid) {
-    nomeErro.innerHTML = "";
-    nomeErro.className = "";
-  } else {
-    nomeErro.innerHTML = "Por favor, preencha este campo corretamente.";
-    nomeErro.className = "error";
+    $("#btnAddLoja").attr("disabled", "true");
   }
 });
 
+$("#iContatoLoja").on("keyup", function() {
+  $(".form-text").empty();
+
+  const elemento = $(this);
+  const elementoNext = $(this).next(".form-text");
+
+  //Caso extrapolou o número de caracteres não adicional como valor
+  const val = elemento.val().length < 15 ? elemento.val() : null;
+
+  if(val.length < 15) {
+    elemento.addClass("campo-success");
+
+    $("#btnAddLoja").removeAttr("disabled");
+  }
+  else {
+    elemento.addClass("campo-error");
+    elementoNext.addClass("msg-error");
+    elementoNext.append("O número não corresponde a um formato válido!");
+
+    $("#btnAddPessoa").attr("disabled", "true");
+  }
+});
+
+$("#iNomePessoa").on("keyup", function() {
+  $(".form-text").empty();
+
+  const elemento = $(this);
+  const elementoNext = $(this).next(".form-text");
+  const val = elemento.val();
+
+  if(verificaString(val)) {
+    elemento.removeClass("campo-error");
+    elemento.addClass("campo-success");
+    
+    $("#btnAddPessoa").removeAttr("disabled");
+  }
+  else {
+    elemento.removeClass("campo-success");
+    elemento.addClass("campo-error");
+    elementoNext.addClass("msg-error");
+    elementoNext.append("Nome inválido!");
+
+    $("#btnAddPessoa").attr("disabled", "true");
+  }
+});
+
+$("#iContatoPessoa").on("keyup", function() {
+  $(".form-text").empty();
+
+  const elemento = $(this);
+  const elementoNext = $(this).next(".form-text");
+
+  //Caso extrapolou o número de caracteres não adicional como valor
+  const val = elemento.val().length < 15 ? elemento.val() : null;
+
+  if(val.length < 15) {
+    elemento.addClass("campo-success");
+
+    $("#btnAddLoja").removeAttr("disabled");
+  }
+  else {
+    elemento.addClass("campo-error");
+    elementoNext.addClass("msg-error");
+    elementoNext.append("O número não corresponde a um formato válido!");
+
+    $("#btnAddPessoa").attr("disabled", "true");
+  }
+});
 
 //Funções
 
@@ -291,4 +368,17 @@ function preencherTablePessoa(listPessoas) {
     $("#tableVerPessoas tbody").prepend(linha);
     linha = "";
   }
+}
+
+function verificaString(name) {
+  let isString = true;
+  for (let i = 0; i < name.length; i++) {
+    console.log(isNaN(name.charAt(i)))
+    if (!isNaN(name.charAt(i)) && name.charAt(i) != " ") {
+      isString = false;
+      break;
+    }
+  }
+
+  return isString;
 }

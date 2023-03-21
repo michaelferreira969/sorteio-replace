@@ -54,6 +54,19 @@ Verde
     }
 }
 
+/*Animação da imagem*/
+@keyframes animarImg {
+    0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+}
+
 body {
     background-color: #A97B56;
     font-family: Montserrat, Arial, sans-serif;
@@ -123,7 +136,7 @@ a, a:visited {
 
 select {
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: .1rem;
     padding: 0.375rem 0.75rem;
     border: none;
@@ -153,10 +166,9 @@ label {
 }
 
 input[type="text"],
-input[type="tel"] {
+input[type="number"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: .6rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -239,6 +251,7 @@ h1 strong {
 .divImg img {
     width: 100%;
     margin-bottom: 0.5rem;
+    animation: animarImg 4s ease-in-out infinite alternate-reverse;
 }
 
 .divBtn {
@@ -251,8 +264,30 @@ h1 strong {
     background-color: #A97B56 !important;
 }
 
-.error {
+.form-text {
+    display: inline-block;
+    margin-bottom: .8rem;
+    padding: .2rem;
+}
+
+.msg-success {
+    color: #4CAF50;
+}
+
+.msg-error {
     color: red;
+}
+
+.campo-success, .campo-success:focus {
+    border-width: 2px;
+    border-color: #4CAF50;
+    outline: #4CAF50;
+}
+
+.campo-error, .campo-error:focus {
+    border-width: 2px;
+    border-color: red;
+    outline: red;
 }
 
 .btnAdd {
@@ -267,6 +302,16 @@ h1 strong {
 
 .btnAdd:hover {
     background-color: #69b46b;
+}
+
+.btnAdd:disabled {
+    background-color: #69b46b;
+    cursor: default;
+}
+
+.total {
+    margin: .5rem 0;
+    color: white;
 }
 
 table {
@@ -467,6 +512,10 @@ table tr:nth-child(even) {
 
     h2 {
         font-size: 2rem;
+    }
+
+    .body-card p {
+        max-width: 600px;
     }
 
     select {
