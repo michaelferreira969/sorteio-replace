@@ -29,7 +29,7 @@
     <!--JQuery Mask-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>   
 
-    <title>Sorteio Replace</title>
+    <title>Sorteio de Bolos Replace</title>
 </head>
 <body>
     <header>
@@ -151,42 +151,42 @@
         <!-- Modal Visualizar Lojas -->
         <div id="modalVerLojas" class="modal">
             <h2>Visualizar Lojas</h2>
-            <div>
+            <div class="table-wrapper">
                 <table id="tableVerLojas" class="table">
                     <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Endereço</th>
-                            <th>Contato</th>
+                        <tr class="title">
+                            <th class="overflow text-left">Nome</th>
+                            <th class="overflow text-left">Endereço</th>
+                            <th class="overflow">Contato</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
-                <div class="total">
-                    Total de <span id="totalLojas"></span> lojas adicionadas.
-                </div>
+            </div>
+            <div class="total">
+                Total de <span id="totalLojas"></span> lojas adicionadas.
             </div>
         </div>
 
         <!-- Modal Visualizar Pessoas -->
         <div id="modalVerPessoas" class="modal">
             <h2>Visualizar Pessoas</h2>
-            <div>
+            <div class="table-wrapper">
                 <table id="tableVerPessoas" class="table">
                     <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Contato</th>
+                        <tr class="title">
+                            <th class="overflow">Nome</th>
+                            <th class="overflow">Email</th>
+                            <th class="overflow">Contato</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
-                <div class="total">
-                    Total de <span id="totalPessoas"></span> pessoas adicionadas.
-                </div>
+            </div>
+            <div class="total">
+                Total de <span id="totalPessoas"></span> pessoas adicionadas.
             </div>
         </div>
 

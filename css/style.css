@@ -24,8 +24,11 @@ Azul
 Laranja
 #FA6615
 
-Verde
+Verde success
 #4CAF50
+
+Vermelho error
+#d10909
 */
 
 /*Fontes*/
@@ -275,19 +278,21 @@ h1 strong {
 }
 
 .msg-error {
-    color: red;
+    color: #d10909;
 }
 
 .campo-success, .campo-success:focus {
     border-width: 2px;
     border-color: #4CAF50;
     outline: #4CAF50;
+    box-shadow: 1px 1px 5px #4CAF50;
 }
 
 .campo-error, .campo-error:focus {
     border-width: 2px;
-    border-color: red;
-    outline: red;
+    border-color: #d10909;
+    outline: #d10909;
+    box-shadow: 1px 1px 5px #d10909;
 }
 
 .btnAdd {
@@ -311,31 +316,36 @@ h1 strong {
 
 .total {
     margin: .5rem 0;
-    color: white;
+    font-weight: 600;
+    color: #523434cc;
+}
+
+.table-wrapper {
+    margin-top: 1rem;
+    max-height: 500px;
+    overflow: auto;
 }
 
 table {
-    margin-top: 1rem;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.014);
-    color: #333;
-    font-size: 16px;
     text-align: left;
 }
 
-table th,
-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+table tr {
+    background-color: #FAE9C4;
+    font-weight: bold;
 }
 
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+tr.title {
+    background-color: #523434cc;
+}
+
+table th, table td {
+    padding: .5rem;
+    text-align: center;
 }
 
 table td {
@@ -343,11 +353,13 @@ table td {
 }
 
 table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #A97B56;
 }
 
-.data {
-    font-size: .7rem;
+.overflow {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 576px) {
@@ -411,6 +423,10 @@ table tr:nth-child(even) {
         width: 95% !important;
         padding: .4rem !important;
     }
+
+    .table-wrapper {
+        max-height: 300px;
+    }
 }
 
 @media (min-width: 576px) {
@@ -445,6 +461,10 @@ table tr:nth-child(even) {
 
     #divSorteio p {
         max-width: 40rem;
+    }
+
+    .table-wrapper {
+        max-height: 400px;
     }
 }
 
@@ -485,6 +505,10 @@ table tr:nth-child(even) {
         max-width: 25rem;
         text-align: left;
     }
+
+    .table-wrapper {
+        max-height: 500px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -524,6 +548,10 @@ table tr:nth-child(even) {
 
     #btnSortear, #btnVoltar {
         font-size: 1.5rem;
+    }
+
+    .table-wrapper {
+        max-height: 700px;
     }
 }
 

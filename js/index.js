@@ -15,370 +15,472 @@ class Pessoa {
   }
 }
 
-//Variáveis
+//Classe principal
+class SorteioReplace {
+  constructor() {
 
-let listLojas = [];
-let loja = {};
+    //Para armazenar as lojas e pessoas
+    this.listLojas = [];
+    this.listPessoas = [];
 
-let listPessoas = [];
-let pessoa = {};
-
-/*Nova loja */
-loja = new Loja("Supremo Bolos", "Rua Florida, 1.410 Brooklin", 51022579)
-listLojas.push(loja);
-
-loja = new Loja("Sodie Doces", "R. Carlos Rega, 74 - Brooklin", 55053434)
-listLojas.push(loja);
-
-loja = new Loja("Isabela Akkari", "R. Comendador Miguel Calfat, 410 - Vila Nova Conceição", 50961915)
-listLojas.push(loja);
-
-loja = new Loja("Fábrica de Bolo Vó Alzira", "Av. Padre Antônio José dos Santos, 1690 - Cidade Monções", 975635523)
-listLojas.push(loja);
-
-/*Nova pessoa*/
-pessoa = new Pessoa("Michael", "michaelferrys969@gmail.com", 953695641)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Douglas", "douglas@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Emerson", "emerson@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Marcelo", "marcelo@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Gabriel", "gabriel@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Rafael", "rafael@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Luís", "luis@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Vicenzo", "vicenzo@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Matheu", "vicenzo@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-pessoa = new Pessoa("Liliane", "vicenzo@gmail.com", 12345678)
-listPessoas.push(pessoa);
-
-//Eventos
-
-//Mask
-$('#iContatoLoja').mask('(00) 0000-0000');
-$('#iContatoPessoa').mask('(00) 0000-0000');
-
-/*Ocultar div ao carregar página*/
-$("#divSorteado").hide();
-
-/*Ao clicar no botão sortear*/
-$(document).on("click", "#btnSortear", function () {
-  /*Pegar a pessoa escolhida*/
-  let pessoaSelected =  $("#listarPessoas").val();
-
-  /*ocultar div*/
-  $("#divSorteio").hide();
-
-  /*Mostrar div*/
-  $("#divSorteado").show();
-
-  //Chama função que faz sorteio
-  let numSorteado = sorteio(); 
-
-  preencherDivSorteado(numSorteado, pessoaSelected);
-});
-
-/*Ao clicar no botão voltar*/
-$(document).on("click", "#btnVoltar", function () {
-  /*Limpar campos*/
-  $("#nomePessoa").empty();
-  $("#nomeLoja").empty();
-  $("#enderecoLoja").empty();
-  $("#contatoLoja").empty();
-
-  /*Mostrar div*/
-  $("#divSorteio").show();
-
-  /*Ocultar div*/
-  $("#divSorteado").hide();
-});
-
-/*Adicionar nova loja*/
-$(document).on("click", "#btnAddLoja", function () {
-  //Pegar campos preenchidos
-  let data = [
-    nome = $("#iNomeLoja").val(),
-    endereco = $("#iEnderecoLoja").val(),
-    contato = parseInt($("#iContatoLoja").val())
-  ];
-
-  addLoja(data);
-
-  //Limpar campos
-  $("#iNomeLoja").val("");
-  $("#iEnderecoLoja").val("");
-  $("#iContatoLoja").val("");
-
-  //Retorna mensagem de sucesso
-  $.toast({
-    heading: 'Success',
-    text: 'Loja Adicionada com sucesso!',
-    showHideTransition: 'slide',
-    icon: 'success'
-  });
-
-  //Fechar modal
-  $(".close-modal").click();  
-});
-
-/*Adicionar nova pessoa*/
-$(document).on("click", "#btnAddPessoa", function () {
-  //Pegar campos preenchidos
-  let data = [
-    nome = $("#iNomePessoa").val(),
-    email = $("#iEmailPessoa").val(),
-    contato = parseInt($("#iContatoPessoa").val())
-  ];
-
-  addPessoa(data);
-
-  //Limpar campos
-  $("#iNomePessoa").val("");
-  $("#iEmailPessoa").val("");
-  $("#iContatoPessoa").val("");
-
-  //Retorna mensagem de sucesso
-  $.toast({
-    heading: 'Success',
-    text: 'Pessoa Adicionada com sucesso!',
-    showHideTransition: 'slide',
-    icon: 'success'
-  });
-
-  //Fechar modal
-  $(".close-modal").click();  
-});
-
-/*Montar dados da tabela Loja*/
-$(document).on("click", "#btnModalVerLojas", function () {
-  $("#tableVerLojas tbody").empty();
-  preencherTableLojas(listLojas);
-
-  $("#totalLojas").append(listLojas.length);
-});
-
-/*Montar dados da tabela Pessoa*/
-$(document).on("click", "#btnModalVerPessoas", function () {
-  $("#tableVerPessoas tbody").empty();
-  preencherTablePessoa(listPessoas);
-
-  $("#totalPessoas").append(listPessoas.length);
-});
-
-$("#iNomeLoja").on("keyup", function() {
-  $(".form-text").empty();
-
-  const elemento = $(this);
-  const elementoNext = $(this).next(".form-text");
-  const val = elemento.val();
-
-  if(verificaString(val)) {
-    elemento.removeClass("campo-error");
-    elemento.addClass("campo-success");
-    
-    $("#btnAddLoja").removeAttr("disabled");
+    this.init();
   }
-  else {
-    elemento.removeClass("campo-success");
-    elemento.addClass("campo-error");
-    elementoNext.addClass("msg-error");
-    elementoNext.append("Nome inválido!");
 
-    $("#btnAddLoja").attr("disabled", "true");
+  init() {
+    let _ = this;
+
+    //Ocultar div sorteado
+    $("#divSorteado").hide();
+
+    //Adicionar pessoas e lojas automáticamente
+    _.pessoasAndLojas();
+
+    //Carregar lista de pessoas
+    _.loadOption();
+
+    //Máscaras dos campos
+    _.mask();
+
+    //Eventos jQuery
+    _.events();
   }
-});
 
-$("#iContatoLoja").on("keyup", function() {
-  $(".form-text").empty();
-
-  const elemento = $(this);
-  const elementoNext = $(this).next(".form-text");
-
-  //Caso extrapolou o número de caracteres não adicional como valor
-  const val = elemento.val().length < 15 ? elemento.val() : null;
-
-  if(val.length < 15) {
-    elemento.addClass("campo-success");
-
-    $("#btnAddLoja").removeAttr("disabled");
+  mask() {
+    $('#iContatoLoja').mask('(00) 00000-0000');
+    $('#iContatoPessoa').mask('(00) 00000-0000');
   }
-  else {
-    elemento.addClass("campo-error");
-    elementoNext.addClass("msg-error");
-    elementoNext.append("O número não corresponde a um formato válido!");
 
-    $("#btnAddPessoa").attr("disabled", "true");
+  events() {
+    let _ = this;
+
+    /*Fazer Sorteio*/
+    $(document).on("click", "#btnSortear", function () {
+      /*Pegar a pessoa escolhida*/
+      let pessoaSelected =  $("#listarPessoas").val();
+
+      /*ocultar div*/
+      $("#divSorteio").hide();
+
+      /*Mostrar div*/
+      $("#divSorteado").show();
+
+      //Chama função que faz sorteio
+      let numSorteado = _.sorteio(); 
+
+      _.preencherDivSorteado(numSorteado, pessoaSelected);
+    });
+
+    /*Ao clicar no botão voltar*/
+    $(document).on("click", "#btnVoltar", function () {
+      /*Limpar campos*/
+      $("#nomePessoa").empty();
+      $("#nomeLoja").empty();
+      $("#enderecoLoja").empty();
+      $("#contatoLoja").empty();
+
+      /*Mostrar div*/
+      $("#divSorteio").show();
+
+      /*Ocultar div*/
+      $("#divSorteado").hide();
+    });
+
+    /*Adicionar nova loja*/
+    $(document).on("click", "#btnAddLoja", function () {
+      let nome = $("#iNomeLoja").val(),
+        endereco = $("#iEnderecoLoja").val(),
+        contato = $("#iContatoLoja").val();
+
+      contato = _.formatarContato(contato);
+
+      if(_.tratarDados(nome, endereco, contato)) {
+
+        let data = new Loja(nome, endereco, contato);
+
+        _.addLoja(data);
+
+        //Limpar campos
+        $("#iNomeLoja").val("");
+        $("#iEnderecoLoja").val("");
+        $("#iContatoLoja").val("");
+  
+        //Retorna mensagem de sucesso
+        $.toast({
+          heading: 'Success',
+          text: 'Loja Adicionada com sucesso!',
+          showHideTransition: 'slide',
+          icon: 'success',
+          position: 'top-right'
+        });
+  
+        //Fechar modal
+        $(".close-modal").click();  
+      }
+      else {
+        //Retorna mensagem de erro
+        $.toast({
+          heading: 'Error',
+          text: 'Não foi possível adicionar loja! Verifique os campos digitados.',
+          showHideTransition: 'slide',
+          icon: 'error',
+          position: 'top-right'
+        });
+      }
+    });
+
+    /*Adicionar nova pessoa*/
+    $(document).on("click", "#btnAddPessoa", function () {
+      let nome = $("#iNomePessoa").val(),
+        email = $("#iEmailPessoa").val(),
+        contato = $("#iContatoPessoa").val();
+
+      contato = _.formatarContato(contato);
+
+      //Verificar se dados estão corretos
+      if(_.tratarDados(nome, email, contato)) {
+
+        let data = new Pessoa(nome, email, contato);
+  
+        _.addPessoa(data);
+  
+        //Limpar campos
+        $("#iNomePessoa").val("");
+        $("#iEmailPessoa").val("");
+        $("#iContatoPessoa").val("");
+  
+        //Retorna mensagem de sucesso
+        $.toast({
+          heading: 'Success',
+          text: 'Pessoa Adicionada com sucesso!',
+          showHideTransition: 'slide',
+          icon: 'success',
+          position: 'top-right'
+        });
+  
+        //Fechar modal
+        $(".close-modal").click();  
+      }
+      else {
+        //Retorna mensagem de erro
+        $.toast({
+          heading: 'Error',
+          text: 'Não foi possível adicionar pessoa! Verifique os campos digitados.',
+          showHideTransition: 'slide',
+          icon: 'error',
+          position: 'top-right'
+        });
+      }
+    });
+
+    /*Montar dados da tabela Loja*/
+    $(document).on("click", "#btnModalVerLojas", function () {
+      $("#tableVerLojas tbody").empty();
+      $("#totalLojas").empty();
+
+      _.preencherTableLojas(_.listLojas);
+
+      $("#totalLojas").append(_.listLojas.length);
+    });
+
+    /*Montar dados da tabela Pessoa*/
+    $(document).on("click", "#btnModalVerPessoas", function () {
+      $("#tableVerPessoas tbody").empty();
+      $("#totalPessoas").empty();
+
+      _.preencherTablePessoa(_.listPessoas);
+
+      $("#totalPessoas").append(_.listPessoas.length);
+    });
+
+    $("#iNomeLoja").on("keyup", function() {
+      $(".form-text").empty();
+
+      const elemento = $(this);
+      const elementoNext = $(this).next(".form-text");
+      const val = elemento.val();
+
+      if(_.verificaString(val)) {
+        elemento.removeClass("campo-error");
+        elemento.addClass("campo-success");
+        
+        $("#btnAddLoja").removeAttr("disabled");
+      }
+      else {
+        elemento.removeClass("campo-success");
+        elemento.addClass("campo-error");
+        elementoNext.addClass("msg-error");
+        elementoNext.append("Nome inválido!");
+
+        $("#btnAddLoja").attr("disabled", "true");
+      }
+    });
+
+    $("#iContatoLoja").on("keyup", function() {
+      $(".form-text").empty();
+
+      const elemento = $(this);
+      const elementoNext = $(this).next(".form-text");
+
+      //Caso extrapolou o número de caracteres não adicional como valor
+      const val = elemento.val().length < 16 ? elemento.val() : null;
+
+      if(val.length < 16) {
+        elemento.addClass("campo-success");
+
+        $("#btnAddLoja").removeAttr("disabled");
+      }
+      else {
+        elemento.addClass("campo-error");
+        elementoNext.addClass("msg-error");
+        elementoNext.append("O número não corresponde a um formato válido!");
+
+        $("#btnAddPessoa").attr("disabled", "true");
+      }
+    });
+
+    $("#iNomePessoa").on("keyup", function() {
+      $(".form-text").empty();
+
+      const elemento = $(this);
+      const elementoNext = $(this).next(".form-text");
+      const val = elemento.val();
+
+      if(_.verificaString(val)) {
+        elemento.removeClass("campo-error");
+        elemento.addClass("campo-success");
+        
+        $("#btnAddPessoa").removeAttr("disabled");
+      }
+      else {
+        elemento.removeClass("campo-success");
+        elemento.addClass("campo-error");
+        elementoNext.addClass("msg-error");
+        elementoNext.append("Nome inválido!");
+
+        $("#btnAddPessoa").attr("disabled", "true");
+      }
+    });
+
+    $("#iContatoPessoa").on("keyup", function() {
+      $(".form-text").empty();
+
+      const elemento = $(this);
+      const elementoNext = $(this).next(".form-text");
+
+      //Caso extrapolou o número de caracteres não adicional como valor
+      const val = elemento.val().length < 16 ? elemento.val() : null;
+
+      if(val.length < 16) {
+        elemento.addClass("campo-success");
+
+        $("#btnAddLoja").removeAttr("disabled");
+      }
+      else {
+        elemento.addClass("campo-error");
+        elementoNext.addClass("msg-error");
+        elementoNext.append("O número não corresponde a um formato válido!");
+
+        $("#btnAddPessoa").attr("disabled", "true");
+      }
+    });
   }
-});
 
-$("#iNomePessoa").on("keyup", function() {
-  $(".form-text").empty();
+  //Setar pessoas e lojas padrão
+  pessoasAndLojas() {
+    let _ = this,
+      pessoa = {},
+      loja = {};
 
-  const elemento = $(this);
-  const elementoNext = $(this).next(".form-text");
-  const val = elemento.val();
+    loja = new Loja("Supremo Bolos", "Rua Florida, 1.410 Brooklin", 11951022579);
+    _.listLojas.push(loja);
 
-  if(verificaString(val)) {
-    elemento.removeClass("campo-error");
-    elemento.addClass("campo-success");
-    
-    $("#btnAddPessoa").removeAttr("disabled");
+    loja = new Loja("Sodie Doces", "R. Carlos Rega, 74 - Brooklin", 11955053434)
+    _.listLojas.push(loja);
+
+    loja = new Loja("Isabela Akkari", "R. Comendador Miguel Calfat, 410 - Vila Nova Conceição", 11950961915)
+    _.listLojas.push(loja);
+
+    loja = new Loja("Fábrica de Bolo Vó Alzira", "Av. Padre Antônio José dos Santos, 1690 - Cidade Monções", 11975635523)
+    _.listLojas.push(loja);
+
+    pessoa = new Pessoa("Galo Cego", "galocego06@gmail.com", 11953695641)
+    _.listPessoas.push(pessoa);
+
+    pessoa = new Pessoa("Jd", "jd01789@gmail.com", 11111111111)
+    _.listPessoas.push(pessoa);
+
+    pessoa = new Pessoa("Bigobaldo", "bigobaldo@hotmail.com", 22222222222)
+    _.listPessoas.push(pessoa);
   }
-  else {
-    elemento.removeClass("campo-success");
-    elemento.addClass("campo-error");
-    elementoNext.addClass("msg-error");
-    elementoNext.append("Nome inválido!");
 
-    $("#btnAddPessoa").attr("disabled", "true");
+  //Carregar opções ao dropList de pessoas
+  loadOption() {
+    let _ = this;
+
+    _.listPessoas.forEach(pessoa => {
+      $("#listarPessoas").append(
+        $('<option>', {
+        value: pessoa.nome,
+        text: pessoa.nome
+        }));
+    });
   }
-});
-
-$("#iContatoPessoa").on("keyup", function() {
-  $(".form-text").empty();
-
-  const elemento = $(this);
-  const elementoNext = $(this).next(".form-text");
-
-  //Caso extrapolou o número de caracteres não adicional como valor
-  const val = elemento.val().length < 15 ? elemento.val() : null;
-
-  if(val.length < 15) {
-    elemento.addClass("campo-success");
-
-    $("#btnAddLoja").removeAttr("disabled");
-  }
-  else {
-    elemento.addClass("campo-error");
-    elementoNext.addClass("msg-error");
-    elementoNext.append("O número não corresponde a um formato válido!");
-
-    $("#btnAddPessoa").attr("disabled", "true");
-  }
-});
-
-//Funções
-
-/*Adicionar a lista de opções*/
-loadOption();
-
-function loadOption() {
-  /*Adicionar opções ao dropList*/
-  listPessoas.forEach(pessoa => {
+  
+  //Adicionar nova pessoa nas opções
+  addPessoaOption(pessoa) {
+    /*Adicionar pessoa ao dropList*/
     $("#listarPessoas").append($('<option>', {
       value: pessoa.nome,
       text: pessoa.nome
     }));
-  });
-}
-
-function addPessoaOption(pessoa) {
-  /*Adicionar pessoa ao dropList*/
-  $("#listarPessoas").append($('<option>', {
-    value: pessoa.nome,
-    text: pessoa.nome
-  }));
-}
-
-function sorteio() {
-  return Math.floor(Math.random() * (listLojas.length));
-}
-
-function preencherDivSorteado(numSorteado, pessoaSelected) {  
-  let lojaSorteada = listLojas[numSorteado];
-  let pessoaSorteada = null;
-
-  if(pessoaSelected) //Busca a pessoa selecionada pelo nome
-    pessoaSorteada = listPessoas.find(p => p.nome == pessoaSelected); 
-  else //Sorteia pessoa aleatória
-    pessoaSorteada = listPessoas[numSorteado]; 
- 
-  //preenche o campo de nome da pessoa
-  $("#nomePessoa").append(pessoaSorteada.nome);
-  
-  //preenche o campo de nome da loja
-  $("#nomeLoja").append(lojaSorteada.nome);
-
-  //preenche o campo de endereço da loja
-  $("#enderecoLoja").append(lojaSorteada.endereco);
-  
-  //preenche o campo de contato da loja
-  $("#contatoLoja").append(lojaSorteada.contato);
-}
-
-function addLoja(data) {
-  let newLoja = new Loja(data[0], data[1], data[2]);
-  listLojas.push(newLoja);
-}
-
-function addPessoa(data) {
-  let newPessoa = new Pessoa(data[0], data[1], data[2]);
-  listPessoas.push(newPessoa);
-
-  /*Adicionar no dropList */
-  addPessoaOption(newPessoa);
-}
-
-function preencherTableLojas(listLojas) {
-  let linha = "";
-  let loja;
-
-  for(let i = 0; i < listLojas.length; i++) {
-    loja = listLojas[i];
-
-    linha += '<tr>';
-    linha += '<td class="data">' + loja.nome + '</td>';
-    linha += '<td class="data"> Rua... </td>';
-    linha += '<td class="data">' + loja.contato + '</td>';
-    linha += '</tr>';
-
-    $("#tableVerLojas tbody").prepend(linha);
-    linha = "";
   }
-}
+  
+  //Sortear um número
+  sorteio() {
+    let _ = this;
 
-function preencherTablePessoa(listPessoas) {
-  let linha = "";
-  let pessoa;
-
-  for(let i = 0; i < listPessoas.length; i++) {
-    pessoa = listPessoas[i];
-
-    linha += '<tr>';
-    linha += '<td class="data">' + pessoa.nome + '</td>';
-    linha += '<td class="data">' + pessoa.email + '</td>';
-    linha += '<td class="data">' + pessoa.contato + '</td>';
-    linha += '</tr>';
-
-    $("#tableVerPessoas tbody").prepend(linha);
-    linha = "";
+    return Math.floor(Math.random() * (_.listLojas.length));
   }
-}
+  
+  //Preencher div sorteado
+  preencherDivSorteado(numSorteado, pessoaSelected) {
+    let _ = this,
+      lojaSorteada,
+      pessoaSorteada;
+    
+    lojaSorteada = _.listLojas[numSorteado];
+    pessoaSorteada = null;
+  
+    if(pessoaSelected) //Busca a pessoa selecionada pelo nome
+      pessoaSorteada = _.listPessoas.find(p => p.nome == pessoaSelected); 
+    else //Sorteia pessoa aleatória
+      pessoaSorteada = _.listPessoas[numSorteado]; 
+   
+    //preenche o campo de nome da pessoa
+    $("#nomePessoa").append(pessoaSorteada.nome);
+    
+    //preenche o campo de nome da loja
+    $("#nomeLoja").append(lojaSorteada.nome);
+  
+    //preenche o campo de endereço da loja
+    $("#enderecoLoja").append(lojaSorteada.endereco);
+    
+    //preenche o campo de contato da loja
+    $("#contatoLoja").append(lojaSorteada.contato);
+  }
+  
+  //Adicionar nova loja
+  addLoja(data) {
+    let _ = this,
+      newLoja;
 
-function verificaString(name) {
-  let isString = true;
-  for (let i = 0; i < name.length; i++) {
-    console.log(isNaN(name.charAt(i)))
-    if (!isNaN(name.charAt(i)) && name.charAt(i) != " ") {
-      isString = false;
-      break;
+    newLoja = new Loja(data.nome, data.endereco, data.contato);
+    _.listLojas.push(newLoja);
+  }
+  
+  //Adicionar pessoa
+  addPessoa(data) {
+    let _ = this,
+      newPessoa;
+
+    newPessoa = new Pessoa(data.nome, data.email, data.contato);
+    _.listPessoas.push(newPessoa);
+  
+    /*Adicionar no dropList */
+    _.addPessoaOption(newPessoa);
+  }
+  
+  //Preencher tabela de lojas
+  preencherTableLojas(listLojas) {
+    let _ = this,
+      linha = "",
+      loja,
+      contatoFormated;
+  
+    for(let i = 0; i < listLojas.length; i++) {
+      loja = listLojas[i];
+
+      contatoFormated = loja.contato.toString();
+      contatoFormated = contatoFormated.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  
+      linha += '<tr>';
+      linha += '<td class="overflow text-left">' + loja.nome + '</td>';
+      linha += '<td class="overflow text-left" title="' + loja.endereco + '">' + loja.endereco + '</td>';
+      linha += '<td class="overflow">' + contatoFormated + '</td>';
+      linha += '</tr>';
+  
+      $("#tableVerLojas tbody").prepend(linha);
+      linha = "";
+    }
+  }
+  
+  //Preencher tabela de pessoas
+  preencherTablePessoa(listPessoas) {
+    let _ = this, 
+      linha = "",
+      pessoa,
+      contatoFormated;
+  
+    for(let i = 0; i < listPessoas.length; i++) {
+      pessoa = listPessoas[i];
+
+      contatoFormated = pessoa.contato.toString();
+      contatoFormated = contatoFormated.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  
+      linha += '<tr>';
+      linha += '<td class="overflow">' + pessoa.nome + '</td>';
+      linha += '<td class="overflow" title="' + pessoa.email + '">' + pessoa.email + '</td>';
+      linha += '<td class="overflow">' + contatoFormated + '</td>';
+      linha += '</tr>';
+  
+      $("#tableVerPessoas tbody").prepend(linha);
+      linha = "";
     }
   }
 
-  return isString;
-}
+  tratarDados(nome, email, contato) {
+    let _ = this;
+
+    //Verificação do nome
+    if(!_.verificaString(nome))
+      return false;
+    
+    if(!_.verificaContato(contato))
+      return false;  
+    
+    return true;
+  }
+  
+  verificaString(name) {
+    let isString = true;
+
+    for (let i = 0; i < name.length; i++) {
+      if (!isNaN(name.charAt(i)) && name.charAt(i) != " ") {
+        isString = false;
+        break;
+      }
+    }
+  
+    return isString;
+  }
+
+  verificaContato(contato) {
+    contato = contato.toString().length;
+
+    return contato == 11 ? true : false;
+  }
+
+  formatarContato(contato) {
+    //Remove tudo que não for dígito
+    contato = contato.replace(/\D/g, '');
+    
+    //Remove espaços no início e no final da string
+    contato = contato.trim(); 
+  
+    return contato;
+  }
+
+}(function () { new SorteioReplace() }())
+
+
+
